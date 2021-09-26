@@ -1,61 +1,30 @@
-canvas = document.getElementById("myCanvas");
-ctx = canvas.getContext("2d");
+menu_list_array = ["Veg Margherita Pizza","Cheese Dominator","Chicken Tandoori","4 Cheese"
+                    ];
 
-var mouseEvent = "empty";
-
-var lstY, lstX;
-
-color = "black";
-width = 4;
-
-canvas.addEventListener("mousedown",my_mousedown);
-
-function my_mousedown(e){
-    color = document.getElementById("clor").value;
-    mouseEvent = "mouseDown";
+function getmenu(){
+var htmldata = [];
+menu_list_array.sort();
+        for(var i=0;i<menu_list_array.length;i++){
+            htmldata=htmldata+ menu_list_array[i] + '<br>'
+        }
+        document.getElementById("display_menu").innerHTML = htmldata;
+         
 }
 
+function add_item(){
+var htmldata = [];
+var item=document.getElementById("add_item").value;
+        
+        menu_list_array.sort();
+        
+        for(var i=0;i<menu_list_array.length;i++){
+            htmldata=htmldata+ menu_list_array[i]+'<br>';
+        }
+         document.getElementById("display_addedmenu").innerHTML = htmldata;		
+      }
 
-canvas.addEventListener("mouseup",my_mouseup);
-
-function my_mouseup(e){
-     
-    mouseEvent = "mouseUP";
-}
-
-
-canvas.addEventListener("mouseleave",my_mouseleave);
-
-function my_mouseleave(e){
-    
-    mouseEvent = "mouseleave";
-}
-
-
-canvas.addEventListener("mousemove",my_mousemove);
-
-function my_mousemove(e){
-
-    console.log(mouseEvent);
-
-    curr_X = e.clientX - canvas.offsetLeft;
-    curr_Y = e.clientY - canvas.offsetTop;
-
-    if(mouseEvent == "mouseDown"){
-
-        ctx.beginPath();
-        ctx.strokeStyle = color;
-
-        ctx.moveTo(lstX,lstY);
-        ctx.lineTo(curr_X,curr_Y);
-        ctx.stroke();
-
-    }
-
-    lstY = curr_Y;
-    lstX = curr_X;
-}
-
-function clicky() 
-{ ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); 
+function add_top(){
+    var item=document.getElementById("add_item").value;
+    menu_list_array.push(item);
+	add_item();
 }
